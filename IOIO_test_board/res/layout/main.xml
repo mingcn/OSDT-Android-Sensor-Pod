@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+	<TextView 
+		    android:text="@string/setUp"
+		    android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+		    />
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		
+		<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingRight="5dp"
+        	android:text="@string/IR_label" />
+		<TextView
+			android:id="@+id/TextViewIR"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		
+		<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingRight="5dp"
+        	android:text="@string/FSH_label" />
+		<TextView
+			android:id="@+id/TextViewFSH"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		
+		<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingRight="5dp"
+        	android:text="@string/FST_label" />
+		<TextView
+			android:id="@+id/TextViewFST"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		
+		<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:paddingRight="5dp"
+        	android:text="@string/Pressure_label" />
+		<TextView
+			android:id="@+id/TextViewPressure"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		
+		<TextView
+			android:text="@string/T_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			/>
+		<TextView
+			android:id="@+id/TextViewT"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		<TextView
+			android:text="@string/H_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			/>
+		<TextView
+			android:id="@+id/TextViewH"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		<TextView
+			android:text="@string/V_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			/>
+		<TextView
+			android:id="@+id/TextViewV"
+			android:text="@string/zero_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="10dp">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			android:text="Rx1"
+			/>
+		<TextView
+			android:id="@+id/TextViewRx1"
+			android:text="@string/none_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			android:text="Rx2"
+			/>
+		<TextView
+			android:id="@+id/TextViewRx2"
+			android:text="@string/none_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingRight="5dp"
+			android:text="Rx3"
+			/>
+		<TextView
+			android:id="@+id/TextViewRx3"
+			android:text="@string/none_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		>
+	<ToggleButton
+		android:id="@+id/ToggleButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:textOff="Led is OFF"
+		android:textOn="Led is ON"
+		/>
+
+	<Button
+	    android:id="@+id/updateButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:text="Update" />
+
+	<ToggleButton
+	    android:id="@+id/crTButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textOn="CR"
+	    android:textOff="CR" />
+
+	<ToggleButton
+	    android:id="@+id/lfTButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textOn="LF" 
+	    android:textOff="LF"/>
+
+</LinearLayout>
+
+	<EditText
+	    android:id="@+id/command1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:hint="default: 0R0">
+	    <requestFocus />
+	</EditText>
+	<Button
+	    android:id="@+id/sendCommand_1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Send command on serial line 1" />
+
+	<EditText
+	    android:id="@+id/command2"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:hint="default: 0R0"/>
+	<Button
+	    android:id="@+id/sendCommand_2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Send command on serial line 2" />
+	
+	<EditText
+	    android:id="@+id/command3"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:hint="default: 0R0"/>
+	<Button
+	    android:id="@+id/sendCommand_3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Send command on serial line 3" />
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:contentDescription="@string/IOIO_label"
+	    android:src="@drawable/ioio_down" />
+
+</LinearLayout>

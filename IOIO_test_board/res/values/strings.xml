@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Test IOIO Board</string>
+    <string name="setUp">Serials:1|2|3{(5,6)|(3,4)|(10,11)}, 9600,8,1,N</string>
+    <string name="T_label">Temperature (PIN 46):</string>
+    <string name="none_label">NONE</string>
+    <string name="zero_label">0</string>
+    <string name="IOIO_label">IOIO</string>
+    <string name="H_label">Relative Humidity (%) (PIN 45):</string>
+    <string name="V_label">Voltage (PIN 44):</string>
+    <string name="IR_label">Solar Irradiation (pin 33): </string>
+    <string name="FSH_label">Fuel Stick Humidity(34): </string>
+    <string name="FST_label">Fuel Stick Temperature(35): </string>
+    <string name="Pressure_label">Android Pressure: </string>
+</resources>

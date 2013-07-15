@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/repo/moore/!svn/ver/297/trunk/lib/src/org/osdt/lib
+END
+IMyService.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repo/moore/!svn/ver/214/trunk/lib/src/org/osdt/lib/IMyService.java
+END
+btDev.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/repo/moore/!svn/ver/297/trunk/lib/src/org/osdt/lib/btDev.java
+END
+DTDisconnectable.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/repo/moore/!svn/ver/214/trunk/lib/src/org/osdt/lib/DTDisconnectable.java
+END
+DTService.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repo/moore/!svn/ver/214/trunk/lib/src/org/osdt/lib/DTService.java
+END
+TerminateSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repo/moore/!svn/ver/214/trunk/lib/src/org/osdt/lib/TerminateSource.java
+END

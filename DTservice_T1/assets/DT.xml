@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<droidturbine>
+
+<options>
+	<batch>false</batch>
+	<WANmode type="cell">true</WANmode>
+	<WANmode type="wifi">true</WANmode>
+	<WANmode type="bluetooth">false</WANmode>
+	<inConfig>UDPcap/config.xml</inConfig>
+	<inConfig>/Server/Folder/config.xml</inConfig>
+	<inConfig>RadioCap/config.xml</inConfig>
+	<outConfig>Config</outConfig>
+	<media>camera</media>
+</options>
+
+<process tag="DataTurbine" class="dtRBNB">
+	<active>true</active>
+	<arg tag="-n">DroidDT</arg>
+	<arg tag="-a">localhost</arg>
+	<arg tag="-p"></arg>
+	<arg tag="-F">false</arg>
+	<arg tag="-l">60,10,0,none</arg>
+	<arg tag="-m">60,10,5000,create</arg>
+</process>
+
+
+<process tag="dtSensor Accel" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">aclSensor</arg>
+	<arg tag="host">localhost</arg>
+	<arg tag="cache">10</arg>
+	<arg tag="archive">1000000</arg>
+	<arg tag="mode">create</arg>
+	<arg tag="fetchPeriod">100</arg>
+	<arg tag="sensorType">accelerometer</arg>
+</process>
+
+<process tag="dtSensor Gyro" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">gyroSensor</arg>
+	<arg tag="cache">1600</arg>
+	<arg tag="archive">20000000</arg>
+	<arg tag="mode">create</arg>
+	<arg tag="dataRate">20</arg>
+	<arg tag="sensorType">gyroscope</arg>
+</process>
+
+<process tag="dtSensor GPS" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">GPS</arg>
+	<arg tag="cache">100</arg>
+	<arg tag="archive">1000000</arg>
+	<arg tag="mode">create</arg>
+	<arg tag="dataRate">1</arg>
+	<arg tag="sensorType">GPS</arg>
+</process>
+
+<process tag="dtSensor Magnetic" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">magSensor</arg>
+	<arg tag="fetchPeriod">100</arg>
+	<arg tag="sensorType">magnetic</arg>
+</process>
+
+<process tag="dtSensor Orientation" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">orientSensor</arg>
+	<arg tag="dataRate">10</arg>
+	<arg tag="sensorType">orientation</arg>
+</process>
+
+<process tag="dtSensor Pressure" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">pressureSensor</arg>
+	<arg tag="dataRate">1</arg>
+	<arg tag="sensorType">pressure</arg>
+</process>
+
+<process tag="dtSensor Light" class="dtSensor">
+	<active>false</active>
+	<arg tag="source">lightSensor</arg>
+	<arg tag="dataRate">5</arg>
+	<arg tag="sensorType">light</arg>
+</process>
+
+</droidturbine>
+

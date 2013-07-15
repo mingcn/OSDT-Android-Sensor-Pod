@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/repo/moore/!svn/ver/297/trunk/lib
+END
+default.properties
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/repo/moore/!svn/ver/117/trunk/lib/default.properties
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/repo/moore/!svn/ver/136/trunk/lib/.classpath
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/repo/moore/!svn/ver/211/trunk/lib/LICENSE.txt
+END
+proguard.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/repo/moore/!svn/ver/117/trunk/lib/proguard.cfg
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/repo/moore/!svn/ver/117/trunk/lib/.project
+END
+AndroidManifest.xml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/repo/moore/!svn/ver/210/trunk/lib/AndroidManifest.xml
+END

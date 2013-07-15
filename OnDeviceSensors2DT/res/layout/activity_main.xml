@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/ippET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/defa"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/DelayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ippET"
+        an=""
+        android:ems="10"
+        android:hint="@string/defaDelay"
+        android:inputType="number"
+        android:singleLine="true" />
+    
+    <Button
+        android:id="@+id/sendAccDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/DelayText"
+        android:onClick="sendAccData"
+        android:text="Send Accelerometer Data" />
+
+    <Button
+        android:id="@+id/stopSendAccDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendAccDataButton"
+        android:onClick="stopSendAccData"
+        android:text="Stop Sending Accelerometer Data" />
+    
+    
+    
+    
+    <Button
+        android:id="@+id/sendPressDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopSendAccDataButton"
+        android:onClick="sendPressData"
+        android:text="Send Pressure Data" />
+
+    <Button
+        android:id="@+id/stopSendPressDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendPressDataButton"
+        android:onClick="stopSendPressData"
+        android:text="Stop Sending Pressure Data" />
+    
+
+    <Button
+        android:id="@+id/sendTempDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopSendPressDataButton"
+        android:onClick="sendTempData"
+        android:text="Send Temperature Data" />
+
+    <Button
+        android:id="@+id/stopSendTempDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendTempDataButton"
+        android:onClick="stopSendTempData"
+        android:text="Stop Sending Temperature Data" />
+    
+    
+    
+    <Button
+        android:id="@+id/sendGPSDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopSendTempDataButton"
+        android:onClick="sendGPSData"
+        android:text="Send GPS Data" />
+
+    <Button
+        android:id="@+id/stopSendGPSDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sendGPSDataButton"
+        android:onClick="stopSendGPSData"
+        android:text="Stop Sending GPS Data" />
+
+
+
+</RelativeLayout>
