@@ -296,6 +296,58 @@ public class Configurator {
 		return cmdList;
 	}
 	
+	public CommandList createCTDCmdList(String name) {
+		String[] chNames = { 
+				"Water Depth",
+				"Temperature",
+				"Electrical Conductivity"
+				};
+
+		String[] dTypes = { "float64", 
+				"float64", 
+				"float64", 
+				"float64" 
+				 };
+
+		String[] units = {
+				"mm",
+				"Celsius",
+				"dS/m"
+				};
+
+		String[] MIMEs = { "application/octet-stream",
+				"application/octet-stream", "application/octet-stream"
+				};
+
+		LinkedList<Command> tempCommandList = new LinkedList<Command>();
+
+		Calendar startDateTime = th.now();
+		Calendar endDateTime = null;
+
+		Interval interval = new Interval(0, 0, 1, 0);// days, hours/24,
+		// min/60, sec/60
+
+		//char CR = 13;
+		//char LF = 10;
+		Command tempCmd = new Command("", "regularExpression", "",
+				5000, 3, 1, interval);
+		tempCmd.setDtSrcName("CTDSrc");
+		tempCmd.setDtAddress(localDtAddress);
+		tempCmd.setRemoteDtAddress(remoteDtAddress);
+		tempCmd.setDelimiter("");
+		tempCmd.setChNames(chNames);
+		tempCmd.setDTypes(dTypes);
+		tempCmd.setUnits(units);
+		tempCmd.setMIMEs(MIMEs);
+
+		tempCommandList.add(tempCmd);
+
+		CommandList cmdList = new CommandList(name, tempCommandList,
+				startDateTime, endDateTime);
+
+		return cmdList;
+	}
+	
 	public CommandList createSolarIRCmdList(String name) {
 
 		String[] chNames = { "solarIR" };
