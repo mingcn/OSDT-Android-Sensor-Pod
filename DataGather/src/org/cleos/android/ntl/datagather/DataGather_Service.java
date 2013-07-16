@@ -362,11 +362,11 @@ public class DataGather_Service extends Service {
 			}
 			
 			// CTD
-			/*IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
+			IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
 			CommandList cmdCTD = conf.createCTDCmdList("CTD");//modified by pstango
 			SerialLineController CTD = new SerialLineController(
 					DGServiceContext, cmdCTD, ioioParametersCTD, TAG + "/"
-							+ "CTD");//modified by pstango*/
+							+ "CTD");//modified by pstango
 
 			kippZonen.start();
 			slcList.add(kippZonen);
@@ -383,8 +383,8 @@ public class DataGather_Service extends Service {
 			tempVolt.start();
 			slcList.add(tempVolt);
 			
-			//CTD.start();
-			//slcList.add(CTD);
+			CTD.start();
+			slcList.add(CTD);
 
 			return slcList;
 		}
