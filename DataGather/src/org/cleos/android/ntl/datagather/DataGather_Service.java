@@ -345,8 +345,8 @@ public class DataGather_Service extends Service {
 			SerialLineController tempVolt = new SerialLineController(
 					DGServiceContext, cmdVolt, ioioParametersVolt, TAG + "/"
 							+ /*"voltage"*/ Configurator.onboardVoltage);//modified by pstango
-
-			if(chosenSensor == "v"){
+		
+			if(chosenSensor.charAt(0) == 'v'){
 				// Vaisela Weather Station
 				IOIOParameters ioioParametersVWS = new IOIOParameters(in3, out3);
 				CommandList cmdVWS = conf.createVWSCmdList(/*"VWS"*/ Configurator.VWS);//modified by pstango
@@ -357,16 +357,20 @@ public class DataGather_Service extends Service {
 				tempVWS.start();
 				slcList.add(tempVWS);
 			}
-			else{
-				
-			}
 			
-			// CTD
-			IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
-			CommandList cmdCTD = conf.createCTDCmdList("CTD");//modified by pstango
-			SerialLineController CTD = new SerialLineController(
+			else if(chosenSensor.charAt(0) == 'c')
+			{
+				// CTD
+				IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
+				CommandList cmdCTD = conf.createCTDCmdList("CTD");//modified by pstango
+				SerialLineController CTD = new SerialLineController(
 					DGServiceContext, cmdCTD, ioioParametersCTD, TAG + "/"
 							+ "CTD");//modified by pstango
+			
+				CTD.start();
+				slcList.add(CTD);
+			}
+			
 
 			kippZonen.start();
 			slcList.add(kippZonen);
@@ -383,8 +387,6 @@ public class DataGather_Service extends Service {
 			tempVolt.start();
 			slcList.add(tempVolt);
 			
-			CTD.start();
-			slcList.add(CTD);
 
 			return slcList;
 		}
