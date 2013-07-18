@@ -4,5 +4,9 @@
     <string name="app_name">SensorPodConfig</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string-array name="arrayUart1">
+        <item>Vaisala</item>
+        <item>CTD</item>
+    </string-array>
 
 </resources>

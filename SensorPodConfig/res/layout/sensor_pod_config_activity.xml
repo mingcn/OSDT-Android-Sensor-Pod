@@ -90,4 +90,12 @@
         android:layout_marginTop="42dp"
         android:text="Save" />
 
+    <Spinner
+        android:id="@+id/spinnerUart1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editUart1"
+        android:layout_marginLeft="71dp"
+        android:layout_toRightOf="@+id/textView1" />
+
 </RelativeLayout>

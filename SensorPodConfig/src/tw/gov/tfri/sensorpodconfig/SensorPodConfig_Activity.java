@@ -3,6 +3,8 @@ package tw.gov.tfri.sensorpodconfig;
 import java.io.File;
 import java.io.IOException;
 
+import org.cleos.android.ntl.utils.Configurator;
+
 //import tw.gov.tfri.XPathParser;
 //import tw.gov.tfri.MainActivity.SaveButtonListener;
 
@@ -13,8 +15,12 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class SensorPodConfig_Activity extends Activity {
@@ -24,7 +30,7 @@ public class SensorPodConfig_Activity extends Activity {
 	public static EditText editSiteName;
 	public static EditText editUart1;
 	public static Button buttonSave;
-	
+	public static Spinner spinnerUart1;
 	
 	public static String DEFAULT_REMOTEDT_IP = "192.168.168.168";
 	public static String DEFAULT_REMOTEDT_PORT = "3333";
@@ -44,8 +50,19 @@ public class SensorPodConfig_Activity extends Activity {
 		editRemoteDT_port = (EditText)findViewById(R.id.editRemoteDT_port);
 		editSiteName = (EditText)findViewById(R.id.editSiteName);
 		editUart1 = (EditText)findViewById(R.id.editUart1);
-		buttonSave = (Button)findViewById(R.id.buttonSave);
 		
+		spinnerUart1 = (Spinner) findViewById(R.id.spinnerUart1);
+		// Create an ArrayAdapter using the string array and a default spinner layout
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.arrayUart1, android.R.layout.simple_spinner_item);
+		// Specify the layout to use when the list of choices appears
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		// Apply the adapter to the spinner
+		spinnerUart1.setAdapter(adapter);
+		
+		spinnerUart1.setOnItemSelectedListener(new SpinnerActivity());
+		
+		buttonSave = (Button)findViewById(R.id.buttonSave);
 		buttonSave.setOnClickListener(new SaveButtonListener());	
 		//		
 			
@@ -92,7 +109,19 @@ public class SensorPodConfig_Activity extends Activity {
 					//get Uart1Rx
 					try {
 						editUart1.setText(g.getDdataFromXML(configFile, "//config//uart1"));
-					} catch (Exception e){
+						
+						String check = g.getDdataFromXML(configFile, "//config//uart1");
+						
+						switch (check.charAt(0)) {
+						case 'v':
+							spinnerUart1.setSelection(0);
+							break;
+						case 'c':
+							spinnerUart1.setSelection(1);
+							break;
+						}
+					} 
+					catch (Exception e){
 						// TODO Auto-generated catch block
 						Toast.makeText(this, "UART1RX ERROR", Toast.LENGTH_LONG).show();
 						e.printStackTrace();
@@ -109,6 +138,21 @@ public class SensorPodConfig_Activity extends Activity {
 		return true;
 	}
 	
+	public class SpinnerActivity extends Activity implements OnItemSelectedListener {
+	    
+	    public void onItemSelected(AdapterView<?> parent, View view, 
+	            int pos, long id) {
+
+	    	if(pos == 0)
+	    		editUart1.setText("v");
+	    	else if(pos == 1)
+	    		editUart1.setText("c");
+	    }
+
+	    public void onNothingSelected(AdapterView<?> parent) {
+	        // Another interface callback
+	    }
+	}
 	
 	public class SaveButtonListener implements OnClickListener{
 		@Override
