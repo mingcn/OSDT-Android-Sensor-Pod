@@ -329,18 +329,18 @@ public class Configurator {
 
 		//char CR = 13;
 		//char LF = 10;
-		Command tempCmd = new Command("", "regularExpression", "",
-				5000, 3, 1, interval);
-		tempCmd.setDtSrcName("CTDSrc");
-		tempCmd.setDtAddress(localDtAddress);
-		tempCmd.setRemoteDtAddress(remoteDtAddress);
-		tempCmd.setDelimiter("");
-		tempCmd.setChNames(chNames);
-		tempCmd.setDTypes(dTypes);
-		tempCmd.setUnits(units);
-		tempCmd.setMIMEs(MIMEs);
 
-		tempCommandList.add(tempCmd);
+		Command dataCmd = new Command("0R0!", "regularExpression", "", 5000, 3, 1, interval);
+		dataCmd.setDtSrcName("CTDSrc");
+		dataCmd.setDtAddress(localDtAddress);
+		dataCmd.setRemoteDtAddress(remoteDtAddress);
+		dataCmd.setDelimiter("");
+		dataCmd.setChNames(chNames);
+		dataCmd.setDTypes(dTypes);
+		dataCmd.setUnits(units);
+		dataCmd.setMIMEs(MIMEs);
+
+		tempCommandList.add(dataCmd);
 
 		CommandList cmdList = new CommandList(name, tempCommandList,
 				startDateTime, endDateTime);
