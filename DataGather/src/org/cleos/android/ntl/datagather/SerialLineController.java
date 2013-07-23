@@ -258,11 +258,16 @@ public class SerialLineController extends Thread {
 			reading = (float)((reading * 2200) - 200);
 			slcName = "SolarIR";
 			break;
+		case 'O':
+			reading = (float)(reading / 1.250);
+			slcName = "Soil";
+			break;
 		case 'F':
 			float readingFST = 0;
 			try
 			{
 				readingFST = analogSensorExtra.getVoltage();
+				log.writelnT("Success FST");
 			}
 			catch (InterruptedException e) {
 				log.writelnT("Error on reading analog. InterrptedException cached: "
@@ -279,6 +284,14 @@ public class SerialLineController extends Thread {
 								+ e.toString());
 				e.printStackTrace();
 			}
+			
+			//Using Vout from LT1168 to find Resistance value of FST
+			readingFST = (float)((float)(1.25) * (float)(49400)) / readingFST; 
+			
+			//Using the steinhart-hart equation to use the thermistor reading to find Temperature
+			double A = .001032, B = .0002378, C = .0000001580;
+			readingFST = (float)(A + (B*Math.log(readingFST)) + ( C * Math.pow( (Math.log(readingFST)), 3) ));
+			readingFST = 1 / readingFST;
 			
 			if(reading < 1.0 && reading >= 0.51)
 			{

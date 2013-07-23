@@ -74,6 +74,7 @@ public class DataGather_Service extends Service {
 	private AnalogInput SolarIR;
 	private AnalogInput FSH;
 	private AnalogInput FST;
+	private AnalogInput Soil;
 
 	/** Object to write a log */
 	private Write2File log;
@@ -86,6 +87,7 @@ public class DataGather_Service extends Service {
 	private static final File configPath = new File("/mnt/sdcard/SensorPodConfig");
 	private static final File configFile = new File(configPath + "/" + "SensorPodConfig.xml");
 	private static String chooseSensor;
+	private static String tempIP;
 	
 	static{
 		if(!(configFile.exists())){
@@ -102,9 +104,12 @@ public class DataGather_Service extends Service {
 		
 		 XPathParser xp = new XPathParser();
 		 chooseSensor = xp.getDdataFromXML(configFile, "//config//uart1");
+		 tempIP = xp.getDdataFromXML(configFile, "//config//remoteDT_IP");
+		 
 	}
 
 	private String chosenSensor = chooseSensor.toLowerCase();
+	private String printIP = tempIP;
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -147,6 +152,7 @@ public class DataGather_Service extends Service {
 
 			setupRunIOIO();
 			msgToast("Services started on runService()");
+			msgToast("The ip is: " + printIP);
 			log.writelnT("Services started on runService()");
 			startForeground(1337, note);
 		}
@@ -312,18 +318,25 @@ public class DataGather_Service extends Service {
 			
 			// KippZonnen Solar Irradiation
 			IOIOParameters ioioParametersSolarIR = new IOIOParameters(SolarIR);
-			CommandList cmdSolarIR = conf.createSolarIRCmdList("SolarIR");
+			CommandList cmdSolarIR = conf.createSolarIRCmdList(Configurator.SolarIR);
 			SerialLineController kippZonen = new SerialLineController(
 					DGServiceContext, cmdSolarIR, ioioParametersSolarIR, TAG + "/"
-							+ "SolarIR");
+							+ Configurator.SolarIR);
 			
 			// Fuel Stick Moisture
 			IOIOParameters ioioParametersFSH = new IOIOParameters(FSH);
 			IOIOParameters ioioParametersFST = new IOIOParameters(FST);
-			CommandList cmdFSM = conf.createSolarIRCmdList("FSM");
+			CommandList cmdFSM = conf.createSolarIRCmdList(Configurator.FSM);
 			SerialLineController fuelStick = new SerialLineController(
 					DGServiceContext, cmdFSM, ioioParametersFSH, ioioParametersFST, TAG + "/"
-							+ "FSM");
+							+ Configurator.FSM);
+			
+			// Soil Moisture
+			IOIOParameters ioioParametersSoil = new IOIOParameters(Soil);
+			CommandList cmdSoil = conf.createSoilCmdList(Configurator.Soil);//modified by pstango
+			SerialLineController soilMoisture = new SerialLineController(
+					DGServiceContext, cmdSoil, ioioParametersSoil, TAG + "/"
+							+ Configurator.Soil);//modified by pstango
 			
 			// onBoardTemp
 			IOIOParameters ioioParametersTemp = new IOIOParameters(temperature);
@@ -346,7 +359,8 @@ public class DataGather_Service extends Service {
 					DGServiceContext, cmdVolt, ioioParametersVolt, TAG + "/"
 							+ /*"voltage"*/ Configurator.onboardVoltage);//modified by pstango
 		
-			if(chosenSensor.charAt(0) == 'v'){
+			if(chosenSensor.charAt(0) == 'v')
+			{
 				// Vaisela Weather Station
 				IOIOParameters ioioParametersVWS = new IOIOParameters(in3, out3);
 				CommandList cmdVWS = conf.createVWSCmdList(/*"VWS"*/ Configurator.VWS);//modified by pstango
@@ -362,13 +376,26 @@ public class DataGather_Service extends Service {
 			{
 				// CTD
 				IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
-				CommandList cmdCTD = conf.createCTDCmdList("CTD");//modified by pstango
+				CommandList cmdCTD = conf.createCTDCmdList(Configurator.CTD);//modified by pstango
 				SerialLineController CTD = new SerialLineController(
 					DGServiceContext, cmdCTD, ioioParametersCTD, TAG + "/"
-							+ "CTD");//modified by pstango
+							+ Configurator.CTD);//modified by pstango
 			
 				CTD.start();
 				slcList.add(CTD);
+			}
+			
+			else if(chosenSensor.charAt(0) == 'd')
+			{
+				// Drain Gauge G3
+				IOIOParameters ioioParametersDG = new IOIOParameters(in3, out3);
+				CommandList cmdDG = conf.createDGCmdList(Configurator.DG);//modified by pstango
+				SerialLineController DG = new SerialLineController(
+					DGServiceContext, cmdDG, ioioParametersDG, TAG + "/"
+							+ Configurator.DG);//modified by pstango
+			
+				DG.start();
+				slcList.add(DG);
 			}
 			
 
@@ -377,6 +404,9 @@ public class DataGather_Service extends Service {
 			
 			fuelStick.start();
 			slcList.add(fuelStick);
+			
+			soilMoisture.start();
+			slcList.add(soilMoisture);
 			
 			tempTemp.start();
 			slcList.add(tempTemp);
@@ -417,6 +447,7 @@ public class DataGather_Service extends Service {
 			SolarIR = ioio_.openAnalogInput(33);
 			FSH = ioio_.openAnalogInput(34);
 			FST = ioio_.openAnalogInput(35);
+			Soil = ioio_.openAnalogInput(36);
 		}// end setupIOIO_IOs()
 
 		/**
