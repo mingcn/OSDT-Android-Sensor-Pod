@@ -61,10 +61,10 @@ public class Configurator {
 				configPath.mkdir();
 				
 				CreateConfigFile cf = new CreateConfigFile();
-				cf.createConfigFile(configPath, configFile, "192.168.168.168", "3333", "TEST", "V");
+				cf.createConfigFile(configPath, configFile, "192.168.3.95", "3333", "TEST", "V");
 			}else{
 				CreateConfigFile cf = new CreateConfigFile();
-				cf.createConfigFile(configPath, configFile, "192.168.168.168", "3333", "TEST", "V");
+				cf.createConfigFile(configPath, configFile, "192.168.3.95", "3333", "TEST", "V");
 			}
 		}
 		
@@ -81,6 +81,11 @@ public class Configurator {
 	public  static String onboardTemperature = siteName + "_" + "OnboardTemperature";
 	public  static String onboardVoltage = siteName + "_" + "OnboardVoltage";
 	public  static String VWS = siteName + "_" + "VWS";
+	public 	static String SolarIR = siteName + "_" + "SolarIR";
+	public  static String FSM = siteName + "_" + "FSM";
+	public  static String Soil = siteName +"_" + "Soil";
+	public  static String CTD = siteName + "_" + "CTD";
+	public  static String DG = siteName + "_" + "DG";
 	
 /*--------------------------------------------------------------------------------------------------------*/	
 	private String remoteDtAddress = remoteDtHost; //modified by pstango
@@ -303,10 +308,10 @@ public class Configurator {
 				"Electrical Conductivity"
 				};
 
-		String[] dTypes = { "float64", 
+		String[] dTypes = { 
 				"float64", 
 				"float64", 
-				"float64" 
+				"float64"
 				 };
 
 		String[] units = {
@@ -327,11 +332,63 @@ public class Configurator {
 		Interval interval = new Interval(0, 0, 1, 0);// days, hours/24,
 		// min/60, sec/60
 
-		//char CR = 13;
-		//char LF = 10;
+		char CR = 13;
+		char LF = 10;
 
-		Command dataCmd = new Command("0R0!", "regularExpression", "", 5000, 3, 1, interval);
+		Command dataCmd = new Command("0R0!", "regularExpression", "" + CR + LF, 5000, 3, 1, interval);
 		dataCmd.setDtSrcName("CTDSrc");
+		dataCmd.setDtAddress(localDtAddress);
+		dataCmd.setRemoteDtAddress(remoteDtAddress);
+		dataCmd.setDelimiter("");
+		dataCmd.setChNames(chNames);
+		dataCmd.setDTypes(dTypes);
+		dataCmd.setUnits(units);
+		dataCmd.setMIMEs(MIMEs);
+
+		tempCommandList.add(dataCmd);
+
+		CommandList cmdList = new CommandList(name, tempCommandList,
+				startDateTime, endDateTime);
+
+		return cmdList;
+	}
+	
+	public CommandList createDGCmdList(String name) {
+		String[] chNames = { 
+				"Water Depth",
+				"Temperature",
+				"Electrical Conductivity"
+				};
+
+		String[] dTypes = { 
+				"float64", 
+				"float64", 
+				"float64"
+				 };
+
+		String[] units = {
+				"mm",
+				"Celsius",
+				"uS/m"
+				};
+
+		String[] MIMEs = { "application/octet-stream",
+				"application/octet-stream", "application/octet-stream"
+				};
+
+		LinkedList<Command> tempCommandList = new LinkedList<Command>();
+
+		Calendar startDateTime = th.now();
+		Calendar endDateTime = null;
+
+		Interval interval = new Interval(0, 0, 1, 0);// days, hours/24,
+		// min/60, sec/60
+
+		char CR = 13;
+		char LF = 10;
+
+		Command dataCmd = new Command("0R0!", "regularExpression", "" + CR + LF, 5000, 3, 1, interval);
+		dataCmd.setDtSrcName("DGSrc");
 		dataCmd.setDtAddress(localDtAddress);
 		dataCmd.setRemoteDtAddress(remoteDtAddress);
 		dataCmd.setDelimiter("");
@@ -406,6 +463,43 @@ public class Configurator {
 		Command tempCmd = new Command("@F", "regularExpression", "", 5000, 3,
 				1, interval);
 		tempCmd.setDtSrcName("BoardFSMSrc");
+		tempCmd.setDtAddress(localDtAddress);
+		tempCmd.setRemoteDtAddress(remoteDtAddress);
+		tempCmd.setDelimiter("");
+		tempCmd.setChNames(chNames);
+		tempCmd.setDTypes(dTypes);
+		tempCmd.setUnits(units);
+		tempCmd.setMIMEs(MIMEs);
+
+		tempCommandList.add(tempCmd);
+
+		CommandList cmdList = new CommandList(name, tempCommandList,
+				startDateTime, endDateTime);
+
+		return cmdList;
+	}
+	
+	public CommandList createSoilCmdList(String name) {
+
+		String[] chNames = { "Soil Moisture" };
+
+		String[] dTypes = { "float64" };
+
+		String[] units = { "%" };
+
+		String[] MIMEs = { "application/octet-stream" };
+
+		LinkedList<Command> tempCommandList = new LinkedList<Command>();
+
+		Calendar startDateTime = th.now();
+		Calendar endDateTime = null;
+
+		Interval interval = new Interval(0, 0, 1, 0); // days, hours/24,
+														// min/60, sec/60
+
+		Command tempCmd = new Command("@O", "regularExpression", "", 5000, 3,
+				1, interval);
+		tempCmd.setDtSrcName("BoardSoilSrc");
 		tempCmd.setDtAddress(localDtAddress);
 		tempCmd.setRemoteDtAddress(remoteDtAddress);
 		tempCmd.setDelimiter("");
