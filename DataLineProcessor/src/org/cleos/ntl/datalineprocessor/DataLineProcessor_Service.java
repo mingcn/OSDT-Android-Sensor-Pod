@@ -141,8 +141,8 @@ public class DataLineProcessor_Service extends Service {
 		dlpSolarIR.start();
 		
 		//Fuel Stick Moisture
-		DataLineProcessor_x dlpFSM = new DataLineProcessor_x(this, "FSM");
-		CommandList cmdFSM = conf.createFSMCmdList("FSM");
+		DataLineProcessor_x dlpFSM = new DataLineProcessor_x(this, Configurator.FSM);
+		CommandList cmdFSM = conf.createFSMCmdList(Configurator.FSM);
 		dlpFSM.setAddressAndPort(cmdFSM.getDTAddress()[0]);
 		dlpFSM.setChNames(cmdFSM.getChNames()[0]);
 		dlpFSM.setDelimiter(cmdFSM.getDelimiter()[0]);
@@ -151,6 +151,18 @@ public class DataLineProcessor_Service extends Service {
 		dlpFSM.setNumParameter(cmdFSM.getChNames()[0].length);
 		dlpFSM.setUnits(cmdFSM.getUnits()[0]);
 		dlpFSM.start();
+		
+		//Soil
+		DataLineProcessor_x dlpSoil = new DataLineProcessor_x(this, "Soil Moisture");
+		CommandList cmdSoil = conf.createSoilCmdList("Soil Moisture");
+		dlpSoil.setAddressAndPort(cmdSoil.getDTAddress()[0]);
+		dlpSoil.setChNames(cmdSoil.getChNames()[0]);
+		dlpSoil.setDelimiter(cmdSoil.getDelimiter()[0]);
+		dlpSoil.setdTypes(cmdSoil.getDTypes()[0]);
+		dlpSoil.setMIMEs(cmdSoil.getMIMEs()[0]);
+		dlpSoil.setNumParameter(cmdSoil.getChNames()[0].length);
+		dlpSoil.setUnits(cmdSoil.getUnits()[0]);
+		dlpSoil.start();
 		
 		// onBoardTemp
 		DataLineProcessor_x dlpOnBoardTemp = new DataLineProcessor_x(this,
@@ -192,8 +204,8 @@ public class DataLineProcessor_Service extends Service {
 		dlpOnBoardVolt.start();
 
 		// Vaisela Weather Station
-		DataLineProcessor_x dlpVWS = new DataLineProcessor_x(this, /*"VWS"*/ Configurator.VWS);//modified by pstango
-		CommandList cmdVWS = conf.createVWSCmdList(/*"VWS"*/ Configurator.VWS);//modified by pstango
+		DataLineProcessor_x dlpVWS = new DataLineProcessor_x(this, Configurator.VWS);//modified by pstango
+		CommandList cmdVWS = conf.createVWSCmdList(Configurator.VWS);//modified by pstango
 		dlpVWS.setAddressAndPort(cmdVWS.getDTAddress()[0]);
 		dlpVWS.setChNames(cmdVWS.getChNames()[0]);
 		dlpVWS.setDelimiter(cmdVWS.getDelimiter()[0]);
@@ -202,13 +214,40 @@ public class DataLineProcessor_Service extends Service {
 		dlpVWS.setNumParameter(cmdVWS.getChNames()[0].length);
 		dlpVWS.setUnits(cmdVWS.getUnits()[0]);
 		dlpVWS.start();
+		
+		// CTD
+		DataLineProcessor_x dlpCTD = new DataLineProcessor_x(this, Configurator.CTD);//modified by pstango
+		CommandList cmdCTD = conf.createCTDCmdList(Configurator.CTD);//modified by pstango
+		dlpCTD.setAddressAndPort(cmdCTD.getDTAddress()[0]);
+		dlpCTD.setChNames(cmdCTD.getChNames()[0]);
+		dlpCTD.setDelimiter(cmdCTD.getDelimiter()[0]);
+		dlpCTD.setdTypes(cmdCTD.getDTypes()[0]);
+		dlpCTD.setMIMEs(cmdCTD.getMIMEs()[0]);
+		dlpCTD.setNumParameter(cmdCTD.getChNames()[0].length);
+		dlpCTD.setUnits(cmdCTD.getUnits()[0]);
+		dlpCTD.start();
+		
+		// Drain Gauge
+		DataLineProcessor_x dlpDG = new DataLineProcessor_x(this, Configurator.DG);//modified by pstango
+		CommandList cmdDG = conf.createDGCmdList(Configurator.DG);//modified by pstango
+		dlpDG.setAddressAndPort(cmdDG.getDTAddress()[0]);
+		dlpDG.setChNames(cmdDG.getChNames()[0]);
+		dlpDG.setDelimiter(cmdDG.getDelimiter()[0]);
+		dlpDG.setdTypes(cmdDG.getDTypes()[0]);
+		dlpDG.setMIMEs(cmdDG.getMIMEs()[0]);
+		dlpDG.setNumParameter(cmdDG.getChNames()[0].length);
+		dlpDG.setUnits(cmdDG.getUnits()[0]);
+		dlpDG.start();
 
 		dlpList.add(dlpSolarIR);
 		dlpList.add(dlpFSM);
+		dlpList.add(dlpSoil);
 		dlpList.add(dlpOnBoardTemp);
 		dlpList.add(dlpOnBoardHumi);
 		dlpList.add(dlpOnBoardVolt);
 		dlpList.add(dlpVWS);
+		dlpList.add(dlpCTD);
+		dlpList.add(dlpDG);
 
 		return dlpList;
 	}

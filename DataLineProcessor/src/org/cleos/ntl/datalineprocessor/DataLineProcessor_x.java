@@ -127,6 +127,16 @@ public class DataLineProcessor_x extends Thread {
 
 	public void processDataLine(String dataLine) {
 		// Log.i(TAG, "Delimiter: " + delimiter);
+		
+		if(dataLine.charAt(1) == '-')
+			dataLine = dataLine.substring(2);
+		
+		if(dataLine.charAt(0) == 'D')
+		{
+			if(dataLine.charAt(1) == 'A')
+				dataLine = dataLine.substring(8);
+		}
+		
 		String[] dataItems = this.parser.getStringData(dataLine, delimiter);
 		if (dataItems.length != numParameters) {
 			

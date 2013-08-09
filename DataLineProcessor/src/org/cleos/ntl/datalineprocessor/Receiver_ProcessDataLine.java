@@ -49,6 +49,16 @@ public class Receiver_ProcessDataLine extends BroadcastReceiver {
 				String slcName = extras.getString(Constants.SLC_NAME);
 				String dataLine = extras.getString(Constants.DATALINE);
 
+				if(dataLine.charAt(0) == '0')
+					if(dataLine.charAt(1) == '0')
+						if(dataLine.charAt(2) == '0')
+							if(dataLine.charAt(3) == '1')
+								if(dataLine.charAt(4) == '3')
+									return;
+				if(dataLine.charAt(0) == 'O')
+					if(dataLine.charAt(1) == 'K')
+						return;
+				
 				Log.i(TAG, "SLC name: " + slcName + ". Data line: " + dataLine);
 				// Log.d(TAG, "Data line: " + dataLine);
 				// start a thread to bind and process the dataline
