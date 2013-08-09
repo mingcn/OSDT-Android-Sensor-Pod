@@ -320,30 +320,26 @@ public class DataGather_Service extends Service {
 			IOIOParameters ioioParametersSolarIR = new IOIOParameters(SolarIR);
 			CommandList cmdSolarIR = conf.createSolarIRCmdList(Configurator.SolarIR);
 			SerialLineController kippZonen = new SerialLineController(
-					DGServiceContext, cmdSolarIR, ioioParametersSolarIR, TAG + "/"
-							+ Configurator.SolarIR);
+					DGServiceContext, cmdSolarIR, ioioParametersSolarIR, TAG + "/" + Configurator.SolarIR);
 			
 			// Fuel Stick Moisture
 			IOIOParameters ioioParametersFSH = new IOIOParameters(FSH);
 			IOIOParameters ioioParametersFST = new IOIOParameters(FST);
 			CommandList cmdFSM = conf.createSolarIRCmdList(Configurator.FSM);
 			SerialLineController fuelStick = new SerialLineController(
-					DGServiceContext, cmdFSM, ioioParametersFSH, ioioParametersFST, TAG + "/"
-							+ Configurator.FSM);
+					DGServiceContext, cmdFSM, ioioParametersFSH, ioioParametersFST, TAG + "/" + Configurator.FSM);
 			
 			// Soil Moisture
 			IOIOParameters ioioParametersSoil = new IOIOParameters(Soil);
 			CommandList cmdSoil = conf.createSoilCmdList(Configurator.Soil);//modified by pstango
 			SerialLineController soilMoisture = new SerialLineController(
-					DGServiceContext, cmdSoil, ioioParametersSoil, TAG + "/"
-							+ Configurator.Soil);//modified by pstango
+					DGServiceContext, cmdSoil, ioioParametersSoil, TAG + "/" + Configurator.Soil);//modified by pstango
 			
 			// onBoardTemp
 			IOIOParameters ioioParametersTemp = new IOIOParameters(temperature);
 			CommandList cmdTemp = conf.createTempCmdList(/*"temperature"*/ Configurator.onboardTemperature);//modified by pstango
 			SerialLineController tempTemp = new SerialLineController(
-					DGServiceContext, cmdTemp, ioioParametersTemp, TAG + "/"
-							+ /*"temperature"*/ Configurator.onboardTemperature);//modified by pstango
+					DGServiceContext, cmdTemp, ioioParametersTemp, TAG + "/" + Configurator.onboardTemperature);//modified by pstango
 
 			// onBoardHumi
 			IOIOParameters ioioParametersHumi = new IOIOParameters(humidity);
@@ -363,10 +359,10 @@ public class DataGather_Service extends Service {
 			{
 				// Vaisela Weather Station
 				IOIOParameters ioioParametersVWS = new IOIOParameters(in3, out3);
-				CommandList cmdVWS = conf.createVWSCmdList(/*"VWS"*/ Configurator.VWS);//modified by pstango
+				CommandList cmdVWS = conf.createVWSCmdList(Configurator.VWS);//modified by pstango
 				SerialLineController tempVWS = new SerialLineController(
 						DGServiceContext, cmdVWS, ioioParametersVWS, TAG + "/"
-								+ /*"VWS"*/ Configurator.VWS);//modified by pstango
+								+ Configurator.VWS);//modified by pstango
 				
 				tempVWS.start();
 				slcList.add(tempVWS);
