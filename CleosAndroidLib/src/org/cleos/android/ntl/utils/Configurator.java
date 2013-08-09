@@ -335,17 +335,21 @@ public class Configurator {
 		char CR = 13;
 		char LF = 10;
 
-		Command dataCmd = new Command("0R0!", "regularExpression", "" + CR + LF, 5000, 3, 1, interval);
+		
+		Command dataCmd = new Command("T 0D0!", "regularExpression", "" + CR, 5000, 3, 1, interval);
 		dataCmd.setDtSrcName("CTDSrc");
 		dataCmd.setDtAddress(localDtAddress);
 		dataCmd.setRemoteDtAddress(remoteDtAddress);
-		dataCmd.setDelimiter("");
+		dataCmd.setDelimiter("+");
 		dataCmd.setChNames(chNames);
 		dataCmd.setDTypes(dTypes);
 		dataCmd.setUnits(units);
 		dataCmd.setMIMEs(MIMEs);
+		
+		Command measureCmd = new Command("T 0M!", "regularExpression", "" + CR, 5000, 3, 1, interval);
 
 		tempCommandList.add(dataCmd);
+		tempCommandList.add(measureCmd);
 
 		CommandList cmdList = new CommandList(name, tempCommandList,
 				startDateTime, endDateTime);
@@ -407,7 +411,7 @@ public class Configurator {
 	
 	public CommandList createSolarIRCmdList(String name) {
 
-		String[] chNames = { "solarIR" };
+		String[] chNames = { "SolarIR" };
 
 		String[] dTypes = { "float64" };
 
@@ -448,7 +452,7 @@ public class Configurator {
 
 		String[] dTypes = { "float64" };
 
-		String[] units = { "%" };
+		String[] units = { "percent" };
 
 		String[] MIMEs = { "application/octet-stream" };
 
@@ -485,7 +489,7 @@ public class Configurator {
 
 		String[] dTypes = { "float64" };
 
-		String[] units = { "%" };
+		String[] units = { "percent" };
 
 		String[] MIMEs = { "application/octet-stream" };
 
