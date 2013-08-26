@@ -137,20 +137,12 @@ public class DataLineProcessor_x extends Thread {
 		if(dataLine.charAt(0) == 'D')
 		{
 			if(dataLine.charAt(1) == 'A')
-				dataLine = dataLine.substring(8);
-		}
-		
-		if(dataLine.charAt(0) == 'O')
-		{
-			if(dataLine.charAt(1) == 'K')
-				return;
+				dataLine = dataLine.substring(9);
 		}
 		
 		if(dataLine.charAt(0) == '0')
-			if(dataLine.charAt(1) == '0')
-				if(dataLine.charAt(2) == '0')
-					return;
-
+			if(dataLine.charAt(1) == '+')
+				dataLine = dataLine.substring(2);
 		
 		String[] dataItems = this.parser.getStringData(dataLine, delimiter);
 		if (dataItems.length != numParameters) {
