@@ -334,7 +334,6 @@ public class Configurator {
 
 		char CR = 13;
 		char LF = 10;
-
 		
 		Command dataCmd = new Command("T 0D0!", "regularExpression", "" + CR, 5000, 3, 1, interval);
 		dataCmd.setDtSrcName("CTDSrc");
