@@ -79,7 +79,7 @@ public class IOIOserial extends IOIOActivity {
 	private TextView textIR;
 	private TextView textFSH;
 	private TextView textFST;
-	private TextView textPressure;
+	private TextView textSoil;
 
 	private ToggleButton toggleButton_;
 	private ToggleButton crTButton, lfTButton;
@@ -100,6 +100,7 @@ public class IOIOserial extends IOIOActivity {
 	private AnalogInput inIR;
 	private AnalogInput inFSH;
 	private AnalogInput inFST;
+	private AnalogInput inSoil;
 	private Uart uart1; // object for the UART (serial) port
 	private Uart uart2; // object for the UART (serial) port
 	private Uart uart3; // object for the UART (serial) port
@@ -110,19 +111,12 @@ public class IOIOserial extends IOIOActivity {
 	private DataInputStream in2;
 	private DataOutputStream out3;
 	private DataInputStream in3;
-	
-	private SensorManager mSensorManager;
-	private Sensor mPressure;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
-	    // Get an instance of the sensor service, and use that to get an instance of
-	    // a particular sensor.
-	    mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-	    mPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
 		
 	}// end onCreate()
 
@@ -146,7 +140,7 @@ public class IOIOserial extends IOIOActivity {
 		textIR = (TextView) findViewById(R.id.TextViewIR);
 		textFSH = (TextView) findViewById(R.id.TextViewFSH);
 		textFST = (TextView) findViewById(R.id.TextViewFST);
-		textPressure = (TextView) findViewById(R.id.TextViewPressure);
+		textSoil = (TextView) findViewById(R.id.TextViewSoil);
 
 		toggleButton_ = (ToggleButton) findViewById(R.id.ToggleButton);
 		updateButton = (Button) findViewById(R.id.updateButton);
@@ -159,44 +153,10 @@ public class IOIOserial extends IOIOActivity {
 		sendCommand_2 = (Button) findViewById(R.id.sendCommand_2);
 		sendCommand_3 = (Button) findViewById(R.id.sendCommand_3);
 		
-		SensorActivity SA = createSensorActivity();
-	    mSensorManager.registerListener(SA, mPressure, SensorManager.SENSOR_DELAY_NORMAL);
-	    
-	    /*SensorActivity PressureSensor = new SensorActivity();
-		float readingPressure = PressureSensor.getPressure();
-	    Toast.makeText(this, Float.toString(readingPressure), Toast.LENGTH_LONG).show();*/
-	    
 		setButtons();
 		
 		enableUi(false);
 	}// end onResume()
-
-	
-	class SensorActivity extends Activity implements SensorEventListener{
-		
-		 float pressure;
-		
-		  @Override
-		  public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-		    // Do something here if sensor accuracy changes.
-		  }
-
-		  @Override
-		  public final void onSensorChanged(SensorEvent event) {
-		    pressure = event.values[0];
-		    // Do something with this sensor data.
-		  }
-		  
-		  public float getPressure()
-		  {
-			  return pressure;
-		  }
-		
-	}
-	
-	protected SensorActivity createSensorActivity() {
-		return new SensorActivity();
-	}
 
 	private void setButtons() {
 		toggleButton_.setOnClickListener(new OnClickListener() {
@@ -224,18 +184,18 @@ public class IOIOserial extends IOIOActivity {
 					readingV = (float) ((readingV - 2.5) / 0.0681) * -1;
 					setTextV(Float.toString(readingV));
 					float readingIR = inIR.getVoltage();
-					readingIR = (float) (readingIR - 0.64);
+					//readingIR = (float) (readingIR - 0.64);
 					setTextIR(Float.toString(readingIR));
 					float readingFSH = inFSH.getVoltage();
 					//readingFSH = (float)(readingFSH - 1.98);
 					setTextFSH(Float.toString(readingFSH));
 					float readingFST = inFST.getVoltage();
-					//readingFST = (float) (readingFST - 2.75);
+					readingFST = (float)( (1.25 * 49400) / readingFST);
 					setTextFST(Float.toString(readingFST));
+					float readingSoil = inSoil.getVoltage();
+					readingSoil = (float)((readingSoil / 1.25) * 57);
+					setTextSoil(Float.toString(readingSoil));
 					
-					SensorActivity PressureSensor = new SensorActivity();
-					float readingPressure = PressureSensor.getPressure();
-					setTextPressure(Float.toString(readingPressure));
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -277,7 +237,7 @@ public class IOIOserial extends IOIOActivity {
 				final EditText simpleEditText = (EditText) findViewById(R.id.command3);
 				String cmd = simpleEditText.getText().toString();
 				if (cmd.length() < 1) {
-					cmd = "0R0";
+					cmd = "T 0R0!";
 					Log.i(TAG, "No command, usign default command: " + cmd);
 				}
 				Log.i(TAG, "Sending command: " + cmd);
@@ -314,8 +274,6 @@ public class IOIOserial extends IOIOActivity {
 		if (uart3 != null)
 			uart3.close();
 		
-	    // Unregister listener
-		//mSensorManager.unregisterListener(this);
 	}
 
 	private String getEndCommandLine() {
@@ -337,7 +295,8 @@ public class IOIOserial extends IOIOActivity {
 				inV = ioio_.openAnalogInput(44);
 				inIR = ioio_.openAnalogInput(33);
 				inFSH = ioio_.openAnalogInput(34);
-				inFST = ioio_.openAnalogInput(35);
+				inFST = ioio_.openAnalogInput(37);
+				inSoil = ioio_.openAnalogInput(38);
 				
 				led_ = ioio_.openDigitalOutput(IOIO.LED_PIN, true);
 
@@ -471,11 +430,11 @@ public class IOIOserial extends IOIOActivity {
 		
 	}
 	
-	private void setTextPressure(final String str) {
+	private void setTextSoil(final String str) {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				textPressure.setText(str);
+				textSoil.setText(str);
 			}
 		});
 		

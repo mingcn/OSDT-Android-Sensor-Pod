@@ -10,6 +10,6 @@
     <string name="V_label">Voltage (PIN 44):</string>
     <string name="IR_label">Solar Irradiation (pin 33): </string>
     <string name="FSH_label">Fuel Stick Humidity(34): </string>
-    <string name="FST_label">Fuel Stick Temperature(35): </string>
-    <string name="Pressure_label">Android Pressure: </string>
+    <string name="FST_label">Fuel Stick Temperature(37): </string>
+    <string name="Soil_label">Soil Moisture(38): </string>
 </resources>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:id="@+id/ScrollView01"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="wrap_content">
+  
 
 	<TextView 
 		    android:text="@string/setUp"
@@ -77,9 +83,9 @@
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:paddingRight="5dp"
-        	android:text="@string/Pressure_label" />
+        	android:text="@string/Soil_label" />
 		<TextView
-			android:id="@+id/TextViewPressure"
+			android:id="@+id/TextViewSoil"
 			android:text="@string/zero_label"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -270,12 +276,6 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="Send command on serial line 3" />
-
-	<ImageView
-	    android:id="@+id/imageView1"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:contentDescription="@string/IOIO_label"
-	    android:src="@drawable/ioio_down" />
-
+	
 </LinearLayout>
+</ScrollView>
