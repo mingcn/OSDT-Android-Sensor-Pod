@@ -1,5 +1,5 @@
 /*
- Copyright 2012 University of California, San Diego
+ Copyright 2012 University of California, San Diego.
 
  Licensed under the Apache License, Version 1.1 (the "License");
  you may not use this file except in compliance with the License.
