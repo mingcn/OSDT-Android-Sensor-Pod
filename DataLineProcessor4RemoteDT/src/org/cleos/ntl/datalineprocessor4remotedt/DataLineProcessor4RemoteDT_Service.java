@@ -297,7 +297,7 @@ public class DataLineProcessor4RemoteDT_Service extends Service {
 		// log.writelnT(msg);
 	}
 
-	// -----------------------------------------------------------------------------
+	// ------------------------------------------------------------------------------
 
 	public void stopService() {
 		if (isRunningService) {

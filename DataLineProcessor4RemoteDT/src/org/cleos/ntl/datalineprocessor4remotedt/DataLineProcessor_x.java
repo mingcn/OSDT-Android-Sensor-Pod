@@ -126,7 +126,7 @@ public class DataLineProcessor_x extends Thread {
 		this.dtSrc.createChMap(chNames, dTypes, units, MIMEs);
 	}
 
-	// --------- DataLineProcessor:: parser and insertingDT--------
+	// --------- DataLineProcessor:: parser and insertingDT---------
 
 	public void processDataLine(String dataLine) {
 		// Log.i(TAG, "Delimiter: " + delimiter);
