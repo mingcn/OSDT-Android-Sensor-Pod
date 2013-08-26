@@ -20,7 +20,6 @@ import org.cleos.android.lib.Write2File;
 import org.cleos.android.ntl.utils.CommandList;
 import org.cleos.android.ntl.utils.Configurator;
 import org.cleos.ntl.datalineprocessor.lib.DTSrcManager;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -215,6 +214,30 @@ public class DataLineProcessor_Service extends Service {
 		dlpVWS.setUnits(cmdVWS.getUnits()[0]);
 		dlpVWS.start();
 		
+		// Vaisela Weather Station 2
+		DataLineProcessor_x dlpVWS2 = new DataLineProcessor_x(this,Configurator.VWS + "2");//modified by pstango
+		CommandList cmdVWS2 = conf.createVWSCmdList(Configurator.VWS + "2");//modified by pstango
+		dlpVWS2.setAddressAndPort(cmdVWS2.getDTAddress()[0]);
+		dlpVWS2.setChNames(cmdVWS2.getChNames()[0]);
+		dlpVWS2.setDelimiter(cmdVWS2.getDelimiter()[0]);
+		dlpVWS2.setdTypes(cmdVWS2.getDTypes()[0]);
+		dlpVWS2.setMIMEs(cmdVWS2.getMIMEs()[0]);
+		dlpVWS2.setNumParameter(cmdVWS2.getChNames()[0].length);
+		dlpVWS2.setUnits(cmdVWS2.getUnits()[0]);
+		dlpVWS2.start();
+				
+		// Vaisela Weather Station 3
+		DataLineProcessor_x dlpVWS3 = new DataLineProcessor_x(this,Configurator.VWS + "3");//modified by pstango
+		CommandList cmdVWS3 = conf.createVWSCmdList(Configurator.VWS + "3");//modified by pstango
+		dlpVWS3.setAddressAndPort(cmdVWS3.getDTAddress()[0]);
+		dlpVWS3.setChNames(cmdVWS3.getChNames()[0]);
+		dlpVWS3.setDelimiter(cmdVWS3.getDelimiter()[0]);
+		dlpVWS3.setdTypes(cmdVWS3.getDTypes()[0]);
+		dlpVWS3.setMIMEs(cmdVWS3.getMIMEs()[0]);
+		dlpVWS3.setNumParameter(cmdVWS3.getChNames()[0].length);
+		dlpVWS3.setUnits(cmdVWS3.getUnits()[0]);
+		dlpVWS3.start();	
+		
 		// CTD
 		DataLineProcessor_x dlpCTD = new DataLineProcessor_x(this, Configurator.CTD);//modified by pstango
 		CommandList cmdCTD = conf.createCTDCmdList(Configurator.CTD);//modified by pstango
@@ -246,6 +269,8 @@ public class DataLineProcessor_Service extends Service {
 		dlpList.add(dlpOnBoardHumi);
 		dlpList.add(dlpOnBoardVolt);
 		dlpList.add(dlpVWS);
+		dlpList.add(dlpVWS2);
+		dlpList.add(dlpVWS3);
 		dlpList.add(dlpCTD);
 		dlpList.add(dlpDG);
 
