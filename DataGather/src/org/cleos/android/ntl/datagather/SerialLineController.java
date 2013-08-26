@@ -254,17 +254,17 @@ public class SerialLineController extends Thread {
 			//slcName = "voltage";
 			slcName = Configurator.onboardVoltage;
 			break;
-		case 'S':
+		case 'S': //solar irradiation sensor
 			reading = (float)( (reading * 2200) - 200 );
 			slcName = "SolarIR";
 			break;
-		case 'O':
-			reading = (float)(reading / 1.250);
+		case 'O': //soil moisture sensor
+			reading = (float)((reading / 1.250) * 57);
 			slcName = Configurator.Soil;
 			break;
 		case 'F':
 			float readingFST = 1;
-			/*try
+			try
 			{
 				readingFST = analogSensorExtra.getVoltage();
 				log.writelnT("Success FST");
@@ -283,7 +283,7 @@ public class SerialLineController extends Thread {
 						"Error on reading analog. ConnectionLostException cached: "
 								+ e.toString());
 				e.printStackTrace();
-			}*/
+			}
 			
 			//Using Vout from LT1168 to find Resistance value of FST
 			readingFST = (float)((float)(1.25) * (float)(49400)) / readingFST; 

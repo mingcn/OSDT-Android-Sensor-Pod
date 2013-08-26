@@ -316,20 +316,20 @@ public class DataGather_Service extends Service {
 			Configurator conf = new Configurator();
 			LinkedList<SerialLineController> slcList = new LinkedList<SerialLineController>();
 			
-			// KippZonnen Solar Irradiation
+			// KippZonnen Solar Irradiation SMP3-V
 			IOIOParameters ioioParametersSolarIR = new IOIOParameters(SolarIR);
 			CommandList cmdSolarIR = conf.createSolarIRCmdList(Configurator.SolarIR);
 			SerialLineController kippZonen = new SerialLineController(
 					DGServiceContext, cmdSolarIR, ioioParametersSolarIR, TAG + "/" + Configurator.SolarIR);
 			
-			// Fuel Stick Moisture
+			// FTS Fuel Stick Moisture FS3-1
 			IOIOParameters ioioParametersFSH = new IOIOParameters(FSH);
 			IOIOParameters ioioParametersFST = new IOIOParameters(FST);
 			CommandList cmdFSM = conf.createSolarIRCmdList(Configurator.FSM);
 			SerialLineController fuelStick = new SerialLineController(
 					DGServiceContext, cmdFSM, ioioParametersFSH, ioioParametersFST, TAG + "/" + Configurator.FSM);
 			
-			// Soil Moisture
+			// Decagon 10HS Soil Moisture
 			IOIOParameters ioioParametersSoil = new IOIOParameters(Soil);
 			CommandList cmdSoil = conf.createSoilCmdList(Configurator.Soil);//modified by pstango
 			SerialLineController soilMoisture = new SerialLineController(
@@ -355,31 +355,57 @@ public class DataGather_Service extends Service {
 					DGServiceContext, cmdVolt, ioioParametersVolt, TAG + "/"
 							+ /*"voltage"*/ Configurator.onboardVoltage);//modified by pstango
 		
-			if(chosenSensor.charAt(0) == 'v')
-			{
-				// Vaisela Weather Station
-				IOIOParameters ioioParametersVWS = new IOIOParameters(in3, out3);
-				CommandList cmdVWS = conf.createVWSCmdList(Configurator.VWS);//modified by pstango
-				SerialLineController tempVWS = new SerialLineController(
-						DGServiceContext, cmdVWS, ioioParametersVWS, TAG + "/"
-								+ Configurator.VWS);//modified by pstango
+			
+			// Vaisela Weather Station #1
+			IOIOParameters ioioParametersVWS = new IOIOParameters(in1, out1);
+			CommandList cmdVWS = conf.createVWSCmdList(Configurator.VWS);//modified by pstango
+			SerialLineController tempVWS = new SerialLineController(
+					DGServiceContext, cmdVWS, ioioParametersVWS, TAG + "/"
+							+ Configurator.VWS);//modified by pstango
 				
 				tempVWS.start();
 				slcList.add(tempVWS);
-			}
+				
+			//Vaisala Weather Station #2
+			IOIOParameters ioioParametersVWS2 = new IOIOParameters(in2, out2);
+			CommandList cmdVWS2 = conf.createVWSCmdList(Configurator.VWS + "2");
+			SerialLineController tempVWS2 = new SerialLineController(
+					DGServiceContext, cmdVWS2, ioioParametersVWS2, TAG + "/" + Configurator.VWS + "2");
 			
-			else if(chosenSensor.charAt(0) == 'c')
-			{
-				// CTD
-				IOIOParameters ioioParametersCTD = new IOIOParameters(in3, out3);
-				CommandList cmdCTD = conf.createCTDCmdList(Configurator.CTD);//modified by pstango
-				SerialLineController CTD = new SerialLineController(
-					DGServiceContext, cmdCTD, ioioParametersCTD, TAG + "/"
-							+ Configurator.CTD);//modified by pstango
+				tempVWS2.start();
+				slcList.add(tempVWS2);
+				
+			//Vaisala Weather Station #3
+			IOIOParameters ioioParametersVWS3 = new IOIOParameters(in3, out3);
+			CommandList cmdVWS3 = conf.createVWSCmdList(Configurator.VWS + "3");
+			SerialLineController tempVWS3 = new SerialLineController(
+					DGServiceContext, cmdVWS3, ioioParametersVWS3, TAG + "/" + Configurator.VWS + "3");
+				
+				tempVWS3.start();
+				slcList.add(tempVWS3);
+			
+			
+			/*
+			// Decagon CTD
+			IOIOParameters ioioParametersCTD = new IOIOParameters(in2, out2);
+			CommandList cmdCTD = conf.createCTDCmdList(Configurator.CTD);//modified by pstango
+			SerialLineController CTD = new SerialLineController(
+				DGServiceContext, cmdCTD, ioioParametersCTD, TAG + "/"
+						+ Configurator.CTD);//modified by pstango
 			
 				CTD.start();
 				slcList.add(CTD);
-			}
+				
+			// Decagon CTD #2
+			IOIOParameters ioioParametersCTD2 = new IOIOParameters(in3, out3);
+			CommandList cmdCTD2 = conf.createCTDCmdList(Configurator.CTD + "#2");//modified by pstango
+			SerialLineController CTD2 = new SerialLineController(
+				DGServiceContext, cmdCTD2, ioioParametersCTD2, TAG + "/"
+						+ Configurator.CTD + "#2");//modified by pstango
+			
+				CTD2.start();
+				slcList.add(CTD2);
+			
 			
 			else if(chosenSensor.charAt(0) == 'd')
 			{
@@ -392,8 +418,7 @@ public class DataGather_Service extends Service {
 			
 				DG.start();
 				slcList.add(DG);
-			}
-			
+			}*/
 
 			kippZonen.start();
 			slcList.add(kippZonen);
@@ -442,8 +467,8 @@ public class DataGather_Service extends Service {
 			voltage = ioio_.openAnalogInput(44);
 			SolarIR = ioio_.openAnalogInput(33);
 			FSH = ioio_.openAnalogInput(34);
-			FST = ioio_.openAnalogInput(35);
-			Soil = ioio_.openAnalogInput(36);
+			FST = ioio_.openAnalogInput(37);
+			Soil = ioio_.openAnalogInput(38);
 		}// end setupIOIO_IOs()
 
 		/**
